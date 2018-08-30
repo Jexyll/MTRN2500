@@ -119,20 +119,19 @@ void Shape::setColor(float red_, float green_, float blue_) {
 //Draw command for a rectangular prism, rotation is about the initial point
 void rectangularprism::draw() {
 	//convert degrees to radians and find cosine and sine
-	double yrc = cos(3.141592765*rotation / 180);
-	double yrs = sin(3.141592765*rotation / 180);
+		double rc = cos(3.141592765*rotation / 180);
+		double rs = sin(3.141592765*rotation / 180);
 	//define all vertexes
 	double x1 = x;
-	double x2 = x1 + xlength * yrc;
-	double x3 = x1 - zlength * yrs;
+	double x2 = x1 + xlength * rc;
+	double x3 = x1 - zlength * rs;
 	double x4 = (x2 + x3) - x1;
 	double y1 = y;
 	double y2 = y1 + ylength;
 	double z1 = z;
-	double z2 = z1 + xlength * yrs;
-	double z3 = z1 + zlength * yrc;
+	double z2 = z1 + xlength * rs;
+	double z3 = z1 + zlength * rc;
 	double z4 = z2 + z3 - z1;
-	glColor3d(red, green, blue);
 	glBegin(GL_QUAD_STRIP);
 	glVertex3d(x1, y1, z1);
 	glVertex3d(x2, y1, z2);
@@ -161,4 +160,51 @@ void rectangularprism::setdimensions(double xlength_, double ylength_, double zl
 	xlength = xlength_;
 	ylength = ylength_;
 	zlength = zlength_;
+}
+//dimension settings for a triangular prism
+void triangularprism::setdimensions(double base_, double height_, double offset_, double length_) {
+	base = base_;
+	height = height_;
+	length = length_;
+	offset = offset_;
+
+}
+void triangularprism::draw() {
+	double rc = cos(3.141592765*rotation / 180);
+	double rs = sin(3.141592765*rotation / 180);
+	double x1 = x;
+	double y1 = y;
+	double y2 = y + height;
+	double x2 = x1 + base * rc;
+	double x3 = x1 + offset * rs;
+	double z1 = z;
+	double z2 = z1 + base * rs;
+	double z3 = z1 + offset * rc;
+	double x4 = x1 - length * rc;
+	double z4 = z1 + length * rs;
+	double x5 = x2 - length * rc;
+	double z5 = z2 + length * rs;
+	double x6 = x3 - length * rc;
+	double z6 = z3 + length * rs;
+	glBegin(GL_POLYGON);
+	glVertex3d(x1, y1, z1);
+	glVertex3d(x2, y1, z2);
+	glVertex3d(x3, y2, z3);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glVertex3d(x4, y1, z4);
+	glVertex3d(x5, y1, z5);
+	glVertex3d(x6, y2, z6);
+	glEnd();
+	glBegin(GL_QUAD_STRIP);
+	glVertex3d(x1, y1, z1);
+	glVertex3d(x4, y1, z4);
+	glVertex3d(x2, y1, z2);
+	glVertex3d(x5, y1, z5);
+	glVertex3d(x3, y2, z3);
+	glVertex3d(x6, y2, z6);
+	glVertex3d(x1, y1, z1);
+	glVertex3d(x4, y1, z4);
+	glEnd();
+
 }

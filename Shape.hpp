@@ -50,4 +50,12 @@ protected:
 	double xlength, ylength, zlength;
 
 };
+
+class triangularprism : public Shape {
+public:
+	void draw();
+	void setdimensions(double base_, double height_, double offset_, double length);
+protected:
+	double base, height, offset, length;//offset is the distance along the x axis of the top point from the starting point
+};
 #endif // for MTRN3500_SHAPE_H
