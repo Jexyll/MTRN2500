@@ -1,0 +1,46 @@
+﻿  Camera.cpp
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(42): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(43): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(84): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(215): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(216): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(217): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(276): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(282): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(283): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(354): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(398): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(399): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(434): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(439): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(443): warning C4101: 'new_dest_dir': unreferenced local variable
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(768): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(769): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(774): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(775): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(780): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\gonawan\source\repos\project2\project2\camera.cpp(781): warning C4305: '=': truncation from 'double' to 'float'
+  Frustum.cpp
+  Ground.cpp
+c:\users\gonawan\source\repos\project2\project2\ground.cpp(21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\ground.cpp(22): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\ground.cpp(24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\gonawan\source\repos\project2\project2\ground.cpp(25): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+  HUD.cpp
+c:\users\gonawan\source\repos\project2\project2\hud.cpp(40): warning C4018: '<': signed/unsigned mismatch
+  KeyManager.cpp
+  main.cpp
+c:\users\gonawan\source\repos\project2\project2\main.cpp(137): warning C4018: '<': signed/unsigned mismatch
+  Messages.cpp
+c:\users\gonawan\source\repos\project2\project2\messages.cpp(239): warning C4018: '<': signed/unsigned mismatch
+  Obstacle.cpp
+  ObstacleManager.cpp
+  Quaternion.cpp
+  RemoteDataManager.cpp
+  Shape.cpp
+  VectorMaths.cpp
+c:\users\gonawan\source\repos\project2\project2\vectormaths.cpp(123): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Vehicle.cpp
+c:\users\gonawan\source\repos\project2\project2\vehicle.cpp(11): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Project2.vcxproj -> C:\Users\Gonawan\source\repos\Project2\Debug\Project2.exe
