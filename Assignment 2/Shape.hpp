@@ -10,7 +10,6 @@ public:
 	Shape(double x_, double y_, double z_);
 	Shape(double x_, double y_, double z_, double rotation_);
 	virtual ~Shape();
-
 	virtual void draw() = 0;
 
 	double getX();
@@ -40,4 +39,15 @@ protected:
 
 };
 
+
+
+class rectangularprism : public Shape{
+public:
+
+	void draw();
+	void setdimensions(double xlength_, double ylength_, double zlength_);
+protected:
+	double xlength, ylength, zlength;
+
+};
 #endif // for MTRN3500_SHAPE_H

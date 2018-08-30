@@ -1,5 +1,10 @@
 
 #include "Shape.hpp"
+#include <cmath>
+
+
+
+
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -111,3 +116,49 @@ void Shape::setColor(float red_, float green_, float blue_) {
 	blue = blue_;
 };
 
+//Draw command for a rectangular prism, rotation is about the initial point
+void rectangularprism::draw() {
+	//convert degrees to radians and find cosine and sine
+	double yrc = cos(3.141592765*rotation / 180);
+	double yrs = sin(3.141592765*rotation / 180);
+	//define all vertexes
+	double x1 = x;
+	double x2 = x1 + xlength * yrc;
+	double x3 = x1 - zlength * yrs;
+	double x4 = (x2 + x3) - x1;
+	double y1 = y;
+	double y2 = y1 + ylength;
+	double z1 = z;
+	double z2 = z1 + xlength * yrs;
+	double z3 = z1 + zlength * yrc;
+	double z4 = z2 + z3 - z1;
+	glColor3d(red, green, blue);
+	glBegin(GL_QUAD_STRIP);
+	glVertex3d(x1, y1, z1);
+	glVertex3d(x2, y1, z2);
+	glVertex3d(x3, y1, z3);
+	glVertex3d(x4, y1, z4);
+	glVertex3d(x3, y2, z3);
+	glVertex3d(x4, y2, z4);
+	glVertex3d(x1, y2, z1);
+	glVertex3d(x2, y2, z2);
+	glVertex3d(x1, y1, z1);
+	glVertex3d(x2, y2, z2);
+	glEnd();
+	glBegin(GL_QUADS);
+	glVertex3d(x1, y1, z1);
+	glVertex3d(x3, y1, z3);
+	glVertex3d(x3, y2, z3);
+	glVertex3d(x1, y2, z1);
+	glVertex3d(x2, y1, z2);
+	glVertex3d(x4, y1, z4);
+	glVertex3d(x4, y2, z4);
+	glVertex3d(x2, y2, z2);
+	glEnd();
+}
+//dimension settings for a rectangular prism
+void rectangularprism::setdimensions(double xlength_, double ylength_, double zlength_) {
+	xlength = xlength_;
+	ylength = ylength_;
+	zlength = zlength_;
+}
