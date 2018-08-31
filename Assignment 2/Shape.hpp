@@ -10,6 +10,7 @@ public:
 	Shape(double x_, double y_, double z_);
 	Shape(double x_, double y_, double z_, double rotation_);
 	virtual ~Shape();
+
 	virtual void draw() = 0;
 
 	double getX();
@@ -27,6 +28,11 @@ public:
 	void positionInGL();
 	void setColorInGL();
 
+	//void getpoint(int i); only necessary if xp,yp,zp are private/protected
+	double xp[8] = { 0 }; // max number of points in a 3d shape (for our purposes) is 8
+	double yp[8] = { 0 };
+	double zp[8] = { 0 };
+
 	double getRed();
 	double getGreen();
 	double getBlue();
@@ -39,9 +45,7 @@ protected:
 
 };
 
-
-
-class rectangularprism : public Shape{
+class rectangularprism : public Shape {
 public:
 
 	void draw();
@@ -50,4 +54,39 @@ protected:
 	double xlength, ylength, zlength;
 
 };
+
+class triangularprism : public Shape {
+public:
+	void draw();
+	void setdimensions(double base_, double height_, double offset_, double length);
+protected:
+	double base, height, offset, length;//offset is the distance along the x axis of the top point from the starting point
+};
+
+class trapezoid : public Shape {
+public:
+	trapezoid(double base_, double height_, double offset_, double length_, double topwidth_)
+		:base(base_), height(height_), offset(offset_), length(length_), topwidth(topwidth_)
+	{}
+	void draw();
+	void setdimensions(double base_, double height_, double offset_, double length_, double topwidth_);
+
+
+protected:
+	double base, height, offset, length, topwidth;//offset is the distance along the x axis of the top point from the starting point
+
+};
+
+class cylinder : public Shape {
+public:
+
+	void draw();
+	void setdimensions(double baseRadius_, double topRadius_, double height_, double innerRadius_, double outerRadius_, int slices_, int stacks_, int loops_);
+
+protected:
+
+	double baseRadius, topRadius, height, innerRadius, outerRadius;
+	int slices, stacks, loops;
+};
+
 #endif // for MTRN3500_SHAPE_H
