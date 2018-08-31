@@ -222,9 +222,15 @@ void cylinder::draw() {
 	// move the origin to the bottom of the surface
 	glMatrixMode(GL_MODELVIEW);
 	glTranslated(0, baseRadius, -(height)/2);
-	glColor3f(1, 0, 0); // give red color to the surface
+	
+	glColor3f(1, 0, 0); // give color to the surface
 	gluCylinder(gluNewQuadric(), baseRadius, topRadius, height, slices, stacks); // draw the surface of cylinder
-	glColor3f(0, 1, 0); // give green color to the circle
-	gluDisk(gluNewQuadric(), innerRadius, outerRadius, slices, loops); // draw the circle
+	
+	glColor3f(0, 1, 0); // give color to the circle
+	gluDisk(gluNewQuadric(), innerRadius, outerRadius, slices, loops); // draw the base circle
+	
+	glTranslated(0, 0, height);
+	glColor3f(0, 0, 1); // give color to the circle
+	gluDisk(gluNewQuadric(), innerRadius, outerRadius, slices, loops); // draw the top circle
 
 }
