@@ -301,10 +301,14 @@ void cylinder::setdimensions(double baseRadius_, double topRadius_, double heigh
 
 }
 
+cylinder::cylinder()
+{
+}
+
 void cylinder::draw() {
 
 	glMatrixMode(GL_MODELVIEW);
-	glRotated(rotation,0,1,0); // to rotate the shape about y axis
+	//glRotated(rotation,0,1,0); // to rotate the shape about y axis
 	glTranslated(0, baseRadius, -(height)/2);
 
 	glColor3f(1, 0, 0); // give red color to the surface
