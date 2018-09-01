@@ -49,7 +49,9 @@ protected:
 
 class rectangularprism : public Shape {
 public:
-
+	rectangularprism(double xlength_, double ylength_, double zlength_)
+		: xlength(xlength_), ylength(ylength_), zlength(zlength_)
+	{};
 	void draw();
 	void setdimensions(double xlength_, double ylength_, double zlength_);
 protected:
@@ -67,6 +69,7 @@ protected:
 
 class trapezoid : public Shape {
 public:
+	
 	trapezoid(double base_, double height_, double offset_, double length_, double topwidth_)
 		:base(base_), height(height_), offset(offset_), length(length_), topwidth(topwidth_)
 	{}
@@ -81,9 +84,13 @@ protected:
 
 class cylinder : public Shape {
 public:
-	rectangularprism(double xlength_, double ylength_, double zlength_)
-		: xlength(xlength_), ylength(ylength_), zlength(zlength_)
-	{}
+	//rectangularprism(double xlength_, double ylength_, double zlength_)
+	//	: xlength(xlength_), ylength(ylength_), zlength(zlength_)
+	//{};
+	cylinder();
+	cylinder(double baseRadius_, double topRadius_, double height_, double innerRadius_, double outerRadius_, int slices_, int stacks_, int loops_)
+		:baseRadius(baseRadius_), topRadius(topRadius_), height(height_), innerRadius(innerRadius_), outerRadius(outerRadius_), slices(slices_), stacks(stacks_), loops(loops_) 
+	{};
 	void draw();
 	void setdimensions(double baseRadius_, double topRadius_, double height_, double innerRadius_, double outerRadius_, int slices_, int stacks_, int loops_);
 
