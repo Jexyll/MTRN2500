@@ -161,69 +161,8 @@ void drawnewquad(){
 	glVertex2d(200,0);
 	glEnd();
 }
-//Draw command for a rectangular prism, rotation is about the initial point
-void drawnewrectangularprism(double x1, double xlength, double y1, double ylength, double z1, double zlength, double yrotation) {
-	//convert degrees to radians and find cosine and sine
-	double yrc = cos(3.141592765*yrotation / 180);
-	double yrs = sin(3.141592765*yrotation / 180);
-	//define all vertexes
-	double x2 = x1 + xlength * yrc;
-	double x3 = x1 - zlength * yrs;
-	double x4 = (x2 + x3) - x1;
-	double x5 = x1;
-	double x6 = x2;
-	double x7 = x3;
-	double x8 = x4;
-	double y2 = y1;
-	double y3 = y1;
-	double y4 = y1;
-	double y5 = y1 + ylength;
-	double y6 = y5;
-	double y7 = y5;
-	double y8 = y5;
-	double z2 = z1 + xlength * yrs;
-	double z3 = z1 + zlength * yrc;
-	double z4 = z2 + z3 - z1;
-	double z5 = z1;
-	double z6 = z2;
-	double z7 = z3;
-	double z8 = z4;
-	glColor3d(0.0, 0.50, 0.0);
-	glBegin(GL_QUAD_STRIP);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x2, y2, z2);
-	glVertex3d(x3, y3, z3);
-	glVertex3d(x4, y4, z4);
-	glVertex3d(x7, y7, z7);
-	glVertex3d(x8, y8, z8);
-	glVertex3d(x5, y5, z5);
-	glVertex3d(x6, y6, z6);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x2, y2, z2);
-	glEnd();
-	glColor3d(0.5, 0.0, 0.0);
-	glBegin(GL_QUADS);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x3, y3, z3);
-	glVertex3d(x7, y7, z7);
-	glVertex3d(x5, y5, z5);
-	glVertex3d(x2, y2, z2);
-	glVertex3d(x4, y4, z4);
-	glVertex3d(x8, y8, z8);
-	glVertex3d(x6, y6, z6);
-	glEnd();
-}
-/*
-void drawnewtriangularprism(double x1,double y1,double z1,double l1,double l2, double l3, double length, double rotation){
-	double x2 = x1+l1;
-	double x3
-	glBegin(GL_TRIANGLES);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x2, y1, z1);
-	glVertex3d(x3,y3,z1)
 
-}
-*/
+
 void drawnewdisk() {
 	GLUquadric*disk= gluNewQuadric();
 	gluDisk(disk, 0, 2000, 1, 1);
@@ -269,7 +208,34 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-	drawnewrectangularprism(10,20,10,35,10,20,45);
+	//draw a thing example
+	
+	rectangularprism rprsm1(15,15,15);
+	rprsm1.setPosition(0, 0, 0);
+	rprsm1.setRotation(15);
+	rprsm1.setColor(1, 1, 0.85);
+	rprsm1.setColorInGL();
+	rprsm1.draw();
+
+
+	trapezoid trap1(15,15,2.5,15,10);
+	trap1.setPosition(rprsm1.xp[4],rprsm1.yp[4], rprsm1.zp[4]);//rprsm1.?p[4] is point 4 on rprsm 1, rprsm1 can be moved and the trapezoid will be attached
+	trap1.setRotation(15);
+	trap1.setColor(0, 0, 1);
+	trap1.setColorInGL();
+	trap1.draw();
+	
+	
+
+	triangularprism tprsm1(10,15,5,15);
+	tprsm1.setPosition(trap1.xp[3], trap1.yp[3], trap1.zp[3]);//as above
+	tprsm1.setRotation(15);
+	tprsm1.setColor(1, 0, 0);
+	tprsm1.setColorInGL();
+	tprsm1.draw();
+
+
+
 	glutSwapBuffers();
 };
 
