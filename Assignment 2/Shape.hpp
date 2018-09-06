@@ -82,7 +82,7 @@ protected:
 
 };
 
-class cylinder : public Shape {
+/*class cylinder : public Shape {
 public:
 	//rectangularprism(double xlength_, double ylength_, double zlength_)
 	//	: xlength(xlength_), ylength(ylength_), zlength(zlength_)
@@ -93,12 +93,35 @@ public:
 	{};
 	void draw();
 	void setdimensions(double baseRadius_, double topRadius_, double height_, double innerRadius_, double outerRadius_, int slices_, int stacks_, int loops_);
-
 protected:
 
 	double baseRadius, topRadius, height, innerRadius, outerRadius;
 	int slices, stacks, loops;
 };
+*/
+// New Cylinder class
+class cylinder : public Shape {
+public:
+
+	cylinder();
+	//cylinder(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_)
+	//	:baseRadius(baseRadius_), topRadius(topRadius_), height(height_), slices(slices_), stacks(stacks_), loops(loops_)
+	//{};
+
+	cylinder(double radius_, double height_)
+		:baseRadius(radius_), topRadius(radius_), height(height_),slices(256),stacks(radius_),loops(radius_)
+	{};
+	void draw();
+	// void setdimensions(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_);
+	void setdimensions(double radius_, double height_);
+
+protected:
+
+	double baseRadius, topRadius, height;
+
+	int slices, stacks, loops;
+};
+
 
 
 class triangularprism : public Shape {
