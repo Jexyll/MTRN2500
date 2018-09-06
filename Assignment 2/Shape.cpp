@@ -306,6 +306,9 @@ void cylinder::setdimensions(double radius_, double height_) {
 
 	baseRadius = radius_;
 	topRadius = radius_;
+	outerRadius = radius_;
+	stacks = radius_;
+	loops = radius_;
 	height = height_;
 }
 
