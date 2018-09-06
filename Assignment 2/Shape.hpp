@@ -109,7 +109,7 @@ public:
 	//{};
 
 	cylinder(double radius_, double height_)
-		:baseRadius(radius_), topRadius(radius_), height(height_),slices(256),stacks(radius_),loops(radius_)
+		:baseRadius(radius_), topRadius(radius_), height(height_),slices(256),stacks(radius_),loops(radius_),innerRadius(0),outerRadius(radius_)
 	{};
 	void draw();
 	// void setdimensions(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_);
@@ -117,7 +117,7 @@ public:
 
 protected:
 
-	double baseRadius, topRadius, height;
+	double baseRadius, topRadius, height,innerRadius, outerRadius;
 
 	int slices, stacks, loops;
 };
