@@ -288,7 +288,7 @@ void trapezoid::draw() {
 	glEnd();
 
 }
-void cylinder::setdimensions(double baseRadius_, double topRadius_, double height_, double innerRadius_, double outerRadius_, int slices_, int stacks_, int loops_) {
+/*void cylinder::setdimensions(double baseRadius_, double topRadius_, double height_, double innerRadius_, double outerRadius_, int slices_, int stacks_, int loops_) {
 
 	baseRadius = baseRadius_;
 	topRadius = topRadius_;
@@ -299,6 +299,14 @@ void cylinder::setdimensions(double baseRadius_, double topRadius_, double heigh
 	stacks = stacks_;
 	loops = loops_;
 
+}
+*/
+// New Cylinder method
+void cylinder::setdimensions(double radius_, double height_) {
+
+	baseRadius = radius_;
+	topRadius = radius_;
+	height = height_;
 }
 
 cylinder::cylinder()
