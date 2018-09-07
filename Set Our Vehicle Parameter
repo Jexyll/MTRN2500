@@ -1,0 +1,32 @@
+ShapeInit carBody;
+
+					carBody.type = RECTANGULAR_PRISM;
+					carBody.xyz[0] = 0;
+					carBody.xyz[1] = 0.25;
+					carBody.xyz[2] = 0;
+					carBody.rotation = 0;
+					carBody.rgb[0] = 1;
+					carBody.rgb[1] = 0;
+					carBody.rgb[2] = 0;
+					carBody.params.rect.xlen = 2;
+					carBody.params.rect.ylen = 0.75;
+					carBody.params.rect.zlen = 3;
+
+					vm.shapes.push_back;
+
+					ShapeInit carTop;
+					carTop.type = TRAPEZOIDAL_PRISM;
+					carTop.xyz[0] = 0;
+					carTop.xyz[1] = 1;
+					carTop.xyz[2] = 3;
+					carTop.rotation = 0;
+					carTop.rgb[0] = 1;
+					carTop.rgb[1] = 1;
+					carTop.rgb[2] = 1;
+					carTop.params.trap.alen = 2.5;
+					carTop.params.trap.height = 0.6;
+					carTop.params.trap.aoff = 0.75;
+					carTop.params.trap.depth = 2;
+					carTop.params.trap.blen = 1.25;
+					
+					vm.shapes.push_back;
