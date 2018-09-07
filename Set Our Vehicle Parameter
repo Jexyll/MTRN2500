@@ -12,7 +12,7 @@ ShapeInit carBody;
 					carBody.params.rect.ylen = 0.75;
 					carBody.params.rect.zlen = 3;
 
-					vm.shapes.push_back;
+					vm.shapes.push_back(carBody);
 
 					ShapeInit carTop;
 					carTop.type = TRAPEZOIDAL_PRISM;
@@ -29,4 +29,4 @@ ShapeInit carBody;
 					carTop.params.trap.depth = 2;
 					carTop.params.trap.blen = 1.25;
 					
-					vm.shapes.push_back;
+					vm.shapes.push_back(carTop);
