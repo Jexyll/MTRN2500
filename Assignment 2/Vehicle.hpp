@@ -11,7 +11,9 @@ class Vehicle : public Shape {
 	friend void remoteDriver(Vehicle * vehicle, double x, double z, double r, double speed_, double steering_);
 public:
 
-	Vehicle();
+	Vehicle() {
+		speed = steering = 0;
+	};
 	virtual ~Vehicle();
 
 	virtual void update(double dt);
@@ -40,21 +42,9 @@ double clamp(double a, double n, double b);
 
 class custVehicle : public Vehicle {
 public:
-	custVehicle(double test_){}
-	void newtriangularprism(double x_, double y_, double z_, double base_, double height_, double offset_, double length_, double rotation_, double red_, double green_, double blue_);
-	void newrectangularprism(double x_,double y_, double z_, double xlength_, double ylength_, double zlength_, double rotation_, double red_, double green_, double blue_);
-	void newtrapezoid(double x_, double y_, double z_, double base_, double height_, double offset_, double length_, double topwidth_, double rotation_, double red_, double green_, double blue_);
-	void newcylinder(double x_, double y_, double z_, double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_, double rotation_, double red_, double green_, double blue_);
+	custVehicle(double test_) {}
+	custVehicle() {}
 	void draw();
-protected:
-	std::vector<trapezoid> trapezoids;
-	std::vector<rectangularprism> rectangularprisms;
-	std::vector<triangularprism> triangularprisms;
-	std::vector<cylinder> cylinders;
-	int trapezoidcount = 0;
-	int rectanglecount = 0;
-	int trianglecount = 0;
-	int cylindercount = 0;
 };
 #endif // for MTRN3500_VEHICLE_H
 

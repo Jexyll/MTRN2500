@@ -107,7 +107,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new MyVehicle();
+	//vehicle = new custVehicle();
 
 
 	// add test obstacles
@@ -231,15 +231,45 @@ void display() {
 	custVehicle vehicle1(1);
 	vehicle1.setPosition(1, 0, 0);
 	vehicle1.setRotation(15);
-	vehicle1.newrectangularprism(0, 0.25, 0, 2, 0.75, 3,0,1,0,0);
-	vehicle1.newtrapezoid(0, 1, 3, 2.5, 0.6, 0.75, 2, 1.25, 270, 1, 1, 1);
-	vehicle1.newtriangularprism(0, 1, 0, 0.5, 0.4, 0, -2, 90, 0, 1, 0);
-	vehicle1.newcylinder(0, 0, 0.5, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
-	vehicle1.newcylinder(2, 0, 0.5, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
-	vehicle1.newcylinder(0, 0, 2.25, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
-	vehicle1.newcylinder(2, 0, 2.25, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
+	rectangularprism Vrectangle(2, 0.75, 3);
+	Vrectangle.setPosition(0, 0.25, 0);
+	Vrectangle.setColor(1, 0, 0);
+	vehicle1.addShape(&Vrectangle);
+	//vehicle1.newtrapezoid(0, 1, 3, 2.5, 0.6, 0.75, 2, 1.25, 270, 1, 1, 1);
+	//vehicle1.newtriangularprism(0, 1, 0, 0.5, 0.4, 90, -2, 90, 0, 1, 0);
+	//vehicle1.newcylinder(0, 0, 0.5, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
+	//vehicle1.newcylinder(2, 0, 0.5, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
+	//vehicle1.newcylinder(0, 0, 2.25, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
+	//vehicle1.newcylinder(2, 0, 2.25, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
 	vehicle1.draw();
 
+	rectangularprism rectangle(4, 4, 4);
+	rectangle.setPosition(20, 0, 20);
+	rectangle.setRotation(0);
+	rectangle.setColor(1, 0, 0);
+	rectangle.setColorInGL();
+	rectangle.draw();
+
+	triangularprism triangle(4, 4, 60, 4);
+	triangle.setPosition(-20, 0, 20);
+	triangle.setRotation(45);
+	triangle.setColor(0, 1, 0);
+	triangle.setColorInGL();
+	triangle.draw();
+
+	trapezoid trap(4, 4, 1, 4, 2);
+	trap.setPosition(-20, 0, -20);
+	trap.setRotation(0);
+	trap.setColor(0, 0, 1);
+	trap.setColorInGL();
+	trap.draw();
+
+	cylinder cyl(2, 2, 4, 128, 1, 1);
+	cyl.setPosition(20, 0, -20);
+	cyl.setRotation(90);
+	cyl.setColor(1, 1, 1);
+	cyl.setColorInGL();
+	cyl.draw();
 	/*
 	cylinder cylinder1(5, 3, 5, 256, 5, 5);
 	cylinder1.setPosition(0, 0, 0);
@@ -395,7 +425,7 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new MyVehicle();
+								//otherVehicles[vm.remoteID] = new custVehicle();
 
 								//
 								// more student code goes here

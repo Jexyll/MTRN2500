@@ -118,56 +118,35 @@ void Shape::setColor(float red_, float green_, float blue_) {
 
 //Draw command for a rectangular prism, rotation is about the initial point
 void rectangularprism::draw() {
-	//convert degrees to radians and find cosine and sine
-		double rc = cos(3.141592765*rotation / 180);
-		double rs = sin(3.141592765*rotation / 180);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glTranslated(x, y, z);
+	glRotated(-rotation, 0, 1, 0);
 	//define all vertexes
-	xp[0] = x;
-	xp[1] = xp[0] + xlength * rc;
-	xp[3] = xp[0] - zlength * rs;
-	xp[2] = (xp[1] + xp[3]) - xp[0];
-	xp[4] = xp[0];
-	xp[5] = xp[1];
-	xp[6] = xp[2];
-	xp[7] = xp[3];
-	yp[0] = y;
-	yp[1] = yp[0];
-	yp[2] = yp[0];
-	yp[3] = yp[0];
-	yp[4] = yp[0] + ylength;
-	yp[5] = yp[0] + ylength;
-	yp[6] = yp[0] + ylength;
-	yp[7] = yp[0] + ylength;
-	zp[0] = z;
-	zp[1] = zp[0] + xlength * rs;
-	zp[3] = zp[0] + zlength * rc;
-	zp[2] = zp[1] + zp[3] - zp[0];
-	zp[4] = zp[0];
-	zp[5] = zp[1];
-	zp[6] = zp[2];
-	zp[7] = zp[3];
+
 	glBegin(GL_QUAD_STRIP);
-	glVertex3d(xp[0], yp[0], zp[0]);
-	glVertex3d(xp[1], yp[1], zp[1]);
-	glVertex3d(xp[3], yp[3], zp[3]);
-	glVertex3d(xp[2], yp[2], zp[2]);
-	glVertex3d(xp[7], yp[7], zp[7]);
-	glVertex3d(xp[6], yp[6], zp[6]);
-	glVertex3d(xp[4], yp[4], zp[4]);
-	glVertex3d(xp[5], yp[5], zp[5]);
-	glVertex3d(xp[0], yp[0], zp[0]);
-	glVertex3d(xp[1], yp[1], zp[1]);
+	glVertex3d(0, 0, 0);
+	glVertex3d(xlength, 0, 0);
+	glVertex3d(0, ylength, 0);
+	glVertex3d(xlength, ylength, 0);
+	glVertex3d(0, ylength, zlength);
+	glVertex3d(xlength, ylength, zlength);
+	glVertex3d(0, 0, zlength);
+	glVertex3d(xlength, 0, zlength);
+	glVertex3d(0, 0, 0);
+	glVertex3d(xlength, 0, 0);
 	glEnd();
 	glBegin(GL_QUADS);
-	glVertex3d(xp[0], yp[0], zp[0]);
-	glVertex3d(xp[3], yp[3], zp[3]);
-	glVertex3d(xp[7], yp[7], zp[7]);
-	glVertex3d(xp[5], yp[5], zp[5]);
-	glVertex3d(xp[1], yp[1], zp[1]);
-	glVertex3d(xp[2], yp[2], zp[2]);
-	glVertex3d(xp[6], yp[6], zp[6]);
-	glVertex3d(xp[4], yp[4], zp[4]);
+	glVertex3d(0, 0, 0);
+	glVertex3d(0, ylength, 0);
+	glVertex3d(0, ylength, zlength);
+	glVertex3d(0, 0, zlength);
+	glVertex3d(xlength, 0, 0);
+	glVertex3d(xlength, ylength, 0);
+	glVertex3d(xlength, ylength, zlength);
+	glVertex3d(xlength, 0, zlength);
 	glEnd();
+	glPopMatrix();
 }
 //dimension settings for a rectangular prism
 void rectangularprism::setdimensions(double xlength_, double ylength_, double zlength_) {
@@ -176,51 +155,39 @@ void rectangularprism::setdimensions(double xlength_, double ylength_, double zl
 	zlength = zlength_;
 }
 //dimension settings for a triangular prism
-void triangularprism::setdimensions(double base_, double height_, double offset_, double length_) {
-	base = base_;
-	height = height_;
+void triangularprism::setdimensions(double sidea_, double sideb_, double angle_, double length_) {
+	sidea = sidea_;
+	sideb = sideb_;
 	length = length_;
-	offset = offset_;
+	angle = angle_;
 
 }
 void triangularprism::draw() {
-	double rc = cos(3.141592765*rotation / 180);
-	double rs = sin(3.141592765*rotation / 180);
-	double x1 = x;
-	double y1 = y;
-	double y2 = y + height;
-	double x2 = x1 + base * rc;
-	double x3 = x1 + offset * rc;
-	double z1 = z;
-	double z2 = z1 + base * rs;
-	double z3 = z1 + offset * rs;
-	double x4 = x1 - length * rs;
-	double z4 = z1 + length * rc;
-	double x5 = x2 - length * rs;
-	double z5 = z2 + length * rc;
-	double x6 = x3 - length * rs;
-	double z6 = z3 + length * rc;
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glTranslated(x, y, z);
+	glRotated(-rotation, 0, 1, 0);
 	glBegin(GL_POLYGON);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x2, y1, z2);
-	glVertex3d(x3, y2, z3);
+	glVertex3d(0, 0, 0);
+	glVertex3d(sidea, 0, 0);
+	glVertex3d(sideb* cos(3.141592765*angle / 180), sideb*sin(3.141592765*angle / 180), 0);
 	glEnd();
 	glBegin(GL_POLYGON);
-	glVertex3d(x4, y1, z4);
-	glVertex3d(x5, y1, z5);
-	glVertex3d(x6, y2, z6);
+	glVertex3d(0, 0, length);
+	glVertex3d(sidea, 0, length);
+	glVertex3d(sideb* cos(3.141592765*angle / 180), sideb*sin(3.141592765*angle / 180), length);
 	glEnd();
 	glBegin(GL_QUAD_STRIP);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x4, y1, z4);
-	glVertex3d(x2, y1, z2);
-	glVertex3d(x5, y1, z5);
-	glVertex3d(x3, y2, z3);
-	glVertex3d(x6, y2, z6);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x4, y1, z4);
+	glVertex3d(0, 0, 0);
+	glVertex3d(0, 0, length);
+	glVertex3d(sidea, 0, 0);
+	glVertex3d(sidea, 0, length);
+	glVertex3d(sideb* cos(3.141592765*angle / 180), sideb*sin(3.141592765*angle / 180), 0);
+	glVertex3d(sideb* cos(3.141592765*angle / 180), sideb*sin(3.141592765*angle / 180), length);
+	glVertex3d(0, 0, 0);
+	glVertex3d(0, 0, length);
 	glEnd();
-
+	glPopMatrix();
 }
 
 //dimension settings for a trapezoidal prism
@@ -234,60 +201,41 @@ void trapezoid::setdimensions(double base_, double height_, double offset_, doub
 //draw a trapezoidal prism
 void trapezoid::draw() {
 
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glTranslated(x, y, z);
+	glRotated(-rotation, 0, 1, 0);
 	double rc = cos(3.141592765*rotation / 180);
 	double rs = sin(3.141592765*rotation / 180);
-	xp[0] = x;
-	yp[0] = y;
-	yp[1] = y;
-	yp[2] = y + height;
-	yp[3] = y + height;
-	yp[4] = y;
-	yp[5] = y;
-	yp[6] = y + height;
-	yp[7] = y + height;
-	xp[1] = xp[0] + base * rc;
-	xp[2] = xp[0] + (offset + topwidth)*rc;
-	xp[3] = xp[0] + offset * rc;
-	zp[0] = z;
-	zp[1] = zp[0] + base * rs;
-	zp[2] = zp[0] + (offset + topwidth)*rs;
-	zp[3] = zp[0] + offset * rs;
-	xp[4] = xp[0] - length * rs;
-	zp[4] = zp[0] + length * rc;
-	xp[5] = xp[1] - length * rs;
-	zp[5] = zp[1] + length * rc;
-	xp[6] = xp[2] - length * rs;
-	zp[6] = zp[2] + length * rc;
-	xp[7] = xp[3] - length * rs;
-	zp[7] = zp[3] + length * rc;
+
 
 	glBegin(GL_POLYGON);
-	glVertex3d(xp[0], yp[0], zp[0]);
-	glVertex3d(xp[1], yp[1], zp[1]);
-	glVertex3d(xp[2], yp[2], zp[2]);
-	glVertex3d(xp[3], yp[3], zp[3]);
+	glVertex3d(0, 0, 0);
+	glVertex3d(offset, height, 0);
+	glVertex3d(offset+topwidth, height, 0);
+	glVertex3d(base, 0, 0);
 
 	glEnd();
 	glBegin(GL_POLYGON);
-	glVertex3d(xp[4], yp[4], zp[4]);
-	glVertex3d(xp[5], yp[5], zp[5]);
-	glVertex3d(xp[6], yp[6], zp[6]);
-	glVertex3d(xp[7], yp[7], zp[7]);
+	glVertex3d(0, 0, length);
+	glVertex3d(offset, height, length);
+	glVertex3d(offset + topwidth, height, length);
+	glVertex3d(base, 0, length);
 
 	glEnd();
 	glBegin(GL_QUAD_STRIP);
-	glVertex3d(xp[0], yp[0], zp[0]);
-	glVertex3d(xp[4], yp[4], zp[4]);
-	glVertex3d(xp[1], yp[1], zp[1]);
-	glVertex3d(xp[5], yp[5], zp[5]);
-	glVertex3d(xp[2], yp[2], zp[2]);
-	glVertex3d(xp[6], yp[6], zp[6]);
-	glVertex3d(xp[3], yp[3], zp[3]);
-	glVertex3d(xp[7], yp[7], zp[7]);
-	glVertex3d(xp[0], yp[0], zp[0]);
-	glVertex3d(xp[4], yp[4], zp[4]);
+	glVertex3d(0, 0, 0);
+	glVertex3d(0, 0, length);
+	glVertex3d(offset, height, 0);
+	glVertex3d(offset, height, length);
+	glVertex3d(offset + topwidth, height, 0);
+	glVertex3d(offset + topwidth, height, length);
+	glVertex3d(base, 0, 0);
+	glVertex3d(base, 0, length);
+	glVertex3d(0, 0, 0);
+	glVertex3d(0, 0, length);
 	glEnd();
-
+	glPopMatrix();
 }
 
 void cylinder::setdimensions(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_) {

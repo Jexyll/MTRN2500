@@ -1,3 +1,12 @@
-﻿  main.cpp
-c:\users\james jezukaitis\source\repos\assignment 2\assignment 2\main.cpp(137): warning C4018: '<': signed/unsigned mismatch
-  Assignment 2.vcxproj -> C:\Users\James Jezukaitis\source\repos\Assignment 2\Debug\Assignment 2.exe
+﻿  custVehicle.cpp
+  HUD.cpp
+c:\users\james jezukaitis\source\repos\assignment two\assignment 2\hud.cpp(40): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+c:\users\james jezukaitis\source\repos\assignment two\assignment 2\main.cpp(137): warning C4018: '<': signed/unsigned mismatch
+  Obstacle.cpp
+  ObstacleManager.cpp
+  Shape.cpp
+  Vehicle.cpp
+c:\users\james jezukaitis\source\repos\assignment two\assignment 2\vehicle.cpp(26): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Assignment 2.vcxproj -> C:\Users\James Jezukaitis\source\repos\Assignment two\Assignment 2\Debug\Assignment 2.exe
