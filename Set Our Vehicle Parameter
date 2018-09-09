@@ -1,4 +1,4 @@
-ShapeInit carBody;
+	ShapeInit carBody;
 
 					carBody.type = RECTANGULAR_PRISM;
 					carBody.xyz[0] = 0;
@@ -30,3 +30,79 @@ ShapeInit carBody;
 					carTop.params.trap.blen = 1.25;
 					
 					vm.shapes.push_back(carTop);
+
+
+					ShapeInit carBack;
+					carBack.type = TRIANGULAR_PRISM;
+					carBack.xyz[0] = 0;
+					carBack.xyz[1] = 1;
+					carBack.xyz[2] = 0;
+					carBack.rotation = 180;
+					carBack.rgb[0] = 0;
+					carBack.rgb[1] = 1;
+					carBack.rgb[2] = 0;
+					carBack.params.tri.alen = 0.5;
+					carBack.params.tri.blen = 0.5;
+					carBack.params.tri.angle = 90;
+					carBack.params.tri.depth = -2;
+					vm.shapes.push_back(carBack);
+
+					ShapeInit wheel1;
+					wheel1.type = CYLINDER;
+					wheel1.xyz[0] = 0;
+					wheel1.xyz[1] = 0;
+					wheel1.xyz[2] = 0.5;
+					wheel1.rotation = 0;
+					wheel1.rgb[0] = 1;
+					wheel1.rgb[1] = 0;
+					wheel1.rgb[2] = 1;
+					wheel1.params.cyl.radius = 0.25;
+					wheel1.params.cyl.depth = 0.4;
+					wheel1.params.cyl.isRolling = 0;
+					wheel1.params.cyl.isSteering = 0;
+					vm.shapes.push_back(wheel1);
+
+					ShapeInit wheel2;
+					wheel2.type = CYLINDER;
+					wheel2.xyz[0] = 2;
+					wheel2.xyz[1] = 0;
+					wheel2.xyz[2] = 0.5;
+					wheel2.rotation = 0;
+					wheel2.rgb[0] = 1;
+					wheel2.rgb[1] = 0;
+					wheel2.rgb[2] = 1;
+					wheel2.params.cyl.radius = 0.25;
+					wheel2.params.cyl.depth = 0.4;
+					wheel2.params.cyl.isRolling = 0;
+					wheel2.params.cyl.isSteering = 0;
+					vm.shapes.push_back(wheel2);
+
+					ShapeInit wheel3;
+					wheel3.type = CYLINDER;
+					wheel3.xyz[0] = 0;
+					wheel3.xyz[1] = 0;
+					wheel3.xyz[2] = 2.25;
+					wheel3.rotation = 0;
+					wheel3.rgb[0] = 1;
+					wheel3.rgb[1] = 0;
+					wheel3.rgb[2] = 1;
+					wheel3.params.cyl.radius = 0.25;
+					wheel3.params.cyl.depth = 0.4;
+					wheel3.params.cyl.isRolling = 0;
+					wheel3.params.cyl.isSteering = 0;
+					vm.shapes.push_back(wheel3);
+
+					ShapeInit wheel4;
+					wheel4.type = CYLINDER;
+					wheel4.xyz[0] = 2;
+					wheel4.xyz[1] = 0;
+					wheel4.xyz[2] = 2.25;
+					wheel4.rotation = 0;
+					wheel4.rgb[0] = 1;
+					wheel4.rgb[1] = 0;
+					wheel4.rgb[2] = 1;
+					wheel4.params.cyl.radius = 0.25;
+					wheel4.params.cyl.depth = 0.4;
+					wheel4.params.cyl.isRolling = 0;
+					wheel4.params.cyl.isSteering = 0;
+					vm.shapes.push_back(wheel4);
