@@ -11,6 +11,8 @@ public:
 	Shape(double x_, double y_, double z_, double rotation_);
 	virtual ~Shape();
 	virtual void draw() = 0;
+	virtual void spinup(double speed) {}
+	virtual void turnit(double turn){}// spinup and turnit exist as virtual functions so i can override because i'm lazy and don't want to dynamic cast, but they are unneccesary with dynamic casting
 
 	double getX();
 	double getY();
@@ -27,17 +29,12 @@ public:
 	void positionInGL();
 	void setColorInGL();
 
-	//void getpoint(int i); only necessary if xp,yp,zp are private/protected
-	double xp[8] = { 0 }; // max number of points in a 3d shape (for our purposes) is 8
-	double yp[8] = { 0 };
-	double zp[8] = { 0 };
-
-	double relx, rely, relz, relr;
-
 	double getRed();
 	double getGreen();
 	double getBlue();
 	void setColor(float red_, float green_, float blue_);
+
+	int getType();
 
 	//double xpoint, ypoint, zpoint; as above, unneccesary
 
@@ -45,6 +42,8 @@ protected:
 	double x, y, z;               // position
 	double rotation;              // heading of the object in the horizontal plane (degrees)
 	float red, green, blue;       // colour of object
+	int type;
+	double spin =0;
       // position of object relative to center of rotation of vehicle
 
 };
@@ -53,9 +52,12 @@ protected:
 
 class rectangularprism : public Shape{
 public:
+	rectangularprism(){}
 	rectangularprism(double xlength_, double ylength_, double zlength_)
 		: xlength(xlength_), ylength(ylength_), zlength(zlength_)
-	{}
+	{
+		type = 0;
+	}
 	void draw();
 	void setdimensions(double xlength_, double ylength_, double zlength_);
 protected:
@@ -65,20 +67,23 @@ protected:
 
 class triangularprism : public Shape {
 public:
-	triangularprism(double base_, double height_, double offset_, double length_)//constructor
-		:base(base_), height(height_), offset(offset_), length(length_)
-	{}
+	triangularprism(double sidea_, double sideb_, double angle_, double length_)//constructor
+		:sidea(sidea_), sideb(sideb_), angle(angle_), length(length_) {
+		type = 1;
+	}
 	void draw();
-	void setdimensions(double base_, double height_, double offset_, double length_);
+	void setdimensions(double sidea_, double sideb_, double angle_, double length_);
 protected:
-	double base, height, offset, length;//offset is the distance along the x axis of the top point from the starting point
+	double sidea, sideb, angle, length;//offset is the distance along the x axis of the top point from the starting point
 };
 
 class trapezoid : public Shape {
 public:
 	trapezoid(double base_, double height_, double offset_, double length_, double topwidth_)
 		:base(base_), height(height_), offset(offset_), length(length_), topwidth(topwidth_)
-	{}
+	{
+		type = 2;
+	}
 	void draw();
 	void setdimensions(double base_, double height_, double offset_, double length_, double topwidth_);
 
@@ -89,21 +94,28 @@ protected:
 };
 
 class cylinder : public Shape {
+	friend class Vehicle;
 public:
-	//rectangularprism(double xlength_, double ylength_, double zlength_)
-	//	: xlength(xlength_), ylength(ylength_), zlength(zlength_)
-	//{};
+
 	cylinder();
-	cylinder(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_)
-		:baseRadius(baseRadius_), topRadius(topRadius_), height(height_), slices(slices_), stacks(stacks_), loops(loops_)
-	{};
+	cylinder(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_, int turning_)
+		:baseRadius(baseRadius_), topRadius(topRadius_), height(height_), slices(slices_), stacks(stacks_), loops(loops_), turning(turning_)
+	{
+		spin = 0;
+		spinning = 1;
+		type = 3 + turning_;
+		turn = 0;
+	};		
+	virtual void turnit(double turn);
+	void spinup(double speed);
+	void setspinning(int sspin);
 	void draw();
 	void setdimensions(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_);
-
+	void setsteering(int steer);
 protected:
 
-	double baseRadius, topRadius, height;
-	int slices, stacks, loops;
+	double baseRadius, topRadius, height, spin, turn, turning;
+	int slices, stacks, loops, spinning;
 };
 
 #endif // for MTRN3500_SHAPE_H
