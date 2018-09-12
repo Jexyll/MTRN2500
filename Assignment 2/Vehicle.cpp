@@ -2,9 +2,23 @@
 #include "Vehicle.hpp"
 
 
-Vehicle::Vehicle() {
-	speed = steering = 0;
-};
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#elif defined(WIN32)
+#include <Windows.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#endif
+
+
+
 
 Vehicle::~Vehicle()
 {
@@ -64,101 +78,65 @@ double clamp(double a, double n, double b) {
 	return n;
 
 };
+custVehicle::custVehicle() {
 
-void custVehicle::newrectangularprism(double x_, double y_, double z_, double xlength_, double ylength_, double zlength_,double rotation_, double red_, double green_, double blue_) {
-	rectangularprism vehiclerectangle(xlength_, ylength_, zlength_);
-	vehiclerectangle.relx = x_;
-	vehiclerectangle.rely = y_;
-	vehiclerectangle.relz = z_;
-	vehiclerectangle.relr = rotation_;
-	vehiclerectangle.setColor(red_, green_, blue_);
-	double tx = x + cos(3.141592765*rotation / 180)*x_-sin(3.141592765*rotation / 180)*z_;
-	double ty = y + y_;
-	double tz = z + cos(3.141592765*rotation / 180)*z_+sin(3.141592765*rotation / 180)*x_;
-	vehiclerectangle.setPosition(tx, ty, tz);
-	vehiclerectangle.setRotation(rotation+rotation_);
-	rectangularprisms.push_back(vehiclerectangle);
-	++rectanglecount;
-}
+	setPosition(0, 0, 0);
+	setRotation(0);
+	rectangularprism *Vrectangle1 = new rectangularprism(2, 0.75, 3);
+	Vrectangle1->setPosition(1.5, 0.25, -1);
+	Vrectangle1->setColor(1, 0, 0);
+	Vrectangle1->setRotation(90);
+	addShape(Vrectangle1);
+	trapezoid *Vtrap1 = new trapezoid(2.5, 0.6, 0.75, 2, 1.25);
+	Vtrap1->setPosition(1.75, 1, -1);
+	Vtrap1->setRotation(0);
+	Vtrap1->setColor(0, 0, 1);
+	addShape(Vtrap1);
+	triangularprism *Vtriangle1 = new triangularprism(0.5, 0.4, 90, -2);
+	Vtriangle1->setRotation(0);
+	Vtriangle1->setPosition(0.25, 1, -1);
+	Vtriangle1->setColor(0, 1, 0);
+	addShape(Vtriangle1);
+	cylinder *Vcylinder1 = new cylinder(0.75, 0.75, 0.4, 8, 1, 1, 0);
+	Vcylinder1->setPosition(0.7, 0.75, 0.2);
+	Vcylinder1->setRotation(0);
+	Vcylinder1->setColor(1, 1, 1);
+	addShape(Vcylinder1);
+	cylinder *Vcylinder2 = new cylinder(0.75, 0.75, 0.4, 8, 1, 1, 0);
+	Vcylinder2->setPosition(0.7, 0.75, -2.2);
+	Vcylinder2->setRotation(0);
+	Vcylinder2->setColor(1, 1, 1);
+	addShape(Vcylinder2);
+	cylinder *Vcylinder3 = new cylinder(0.25, 0.25, 0.4, 8, 1, 1, 1);
+	Vcylinder3->setPosition(2.5, 0.25, 0.2);
+	Vcylinder3->setRotation(0);
+	Vcylinder3->setColor(1, 1, 1);
+	addShape(Vcylinder3);
+	cylinder *Vcylinder4 = new cylinder(0.25, 0.25, 0.4, 8, 1, 1, 1);
+	Vcylinder4->setPosition(2.5, 0.25, -2.2);
+	Vcylinder4->setRotation(0);
+	Vcylinder4->setColor(1, 1, 1);
+	addShape(Vcylinder4);
 
-void custVehicle::newtriangularprism(double x_, double y_, double z_, double base_, double height_, double offset_, double length_,double rotation_, double red_, double green_, double blue_) {
-	triangularprism vehicletriangle(base_, height_, offset_, length_);
-	vehicletriangle.relx = x_;
-	vehicletriangle.rely = y_;
-	vehicletriangle.relz = z_;
-	vehicletriangle.relr = rotation_;
-	vehicletriangle.setColor(red_, green_, blue_);
-	double tx = x + cos(3.141592765*rotation / 180)*x_ - sin(3.141592765*rotation / 180)*z_;
-	double ty = y + y_;
-	double tz = z + cos(3.141592765*rotation / 180)*z_ + sin(3.141592765*rotation / 180)*x_;
-	vehicletriangle.setPosition(tx, ty, tz);
-	vehicletriangle.setRotation(rotation+rotation_);
-	triangularprisms.push_back(vehicletriangle);
-	++trianglecount;
 }
-
-void custVehicle::newtrapezoid(double x_, double y_, double z_, double base_, double height_, double offset_, double length_, double topwidth_,double rotation_, double red_, double green_, double blue_) {
-	trapezoid vehicletrapezoid(base_, height_, offset_, length_, topwidth_);
-	vehicletrapezoid.relx = x_;
-	vehicletrapezoid.rely = y_;
-	vehicletrapezoid.relz = z_;
-	vehicletrapezoid.relr = rotation_;
-	vehicletrapezoid.setColor(red_, green_, blue_);
-	double tx = x + cos(3.141592765*rotation / 180)*x_ - sin(3.141592765*rotation / 180)*z_;
-	double ty = y + y_;
-	double tz = z + cos(3.141592765*rotation / 180)*z_ + sin(3.141592765*rotation / 180)*x_;
-	vehicletrapezoid.setPosition(tx, ty, tz);
-	vehicletrapezoid.setRotation(rotation+rotation_);
-	trapezoids.push_back(vehicletrapezoid);
-	++trapezoidcount;
-}
-void custVehicle::newcylinder(double x_, double y_, double z_, double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_, double rotation_, double red_, double green_, double blue_) {
-	cylinder vehiclecylinder(baseRadius_,topRadius_,height_,slices_, stacks_,loops_);
-	vehiclecylinder.relx = x_;
-	vehiclecylinder.rely = y_;
-	vehiclecylinder.relz = z_;
-	vehiclecylinder.relr = rotation_;
-	vehiclecylinder.setColor(red_, green_, blue_);
-	double tx = x + cos(3.141592765*rotation / 180)*x_ - sin(3.141592765*rotation / 180)*z_;
-	double ty = y + y_;
-	double tz = z + cos(3.141592765*rotation / 180)*z_ + sin(3.141592765*rotation / 180)*x_;
-	vehiclecylinder.setPosition(tx, ty, tz);
-	vehiclecylinder.setRotation(rotation + rotation_);
-	cylinders.push_back(vehiclecylinder);
-	++cylindercount;
-}
-//void custVehicle::newcylinder(double x_, double y_, double z_, double) {
-
-//}
 
 void custVehicle::draw() {
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glTranslated(x, y, z);
+	glRotated(-rotation, 0, 1, 0);
 
-	int i = 0;
-	while (i < rectanglecount) {
-		rectangularprisms[i].setColorInGL();
-		rectangularprisms[i].setRotation(rectangularprisms[i].relr + rotation);
-		rectangularprisms[i].draw();
-		++i;
+	for (std::vector<Shape*>::iterator it = shapes.begin(); it != shapes.end(); ++it) {
+		if ((*it)->getType() == 3) {
+			(*it)->spinup(speed);
+		}
+		if ((*it)->getType() == 4) {
+			(*it)->spinup(speed);
+			(*it)->turnit(-steering);
+		}
+		(*it)->setColorInGL();
+		(*it)->draw();
 	}
-	i = 0;
-	while (i < trianglecount) {
-		triangularprisms[i].setColorInGL();
-		triangularprisms[i].setRotation(triangularprisms[i].relr + rotation);
-		triangularprisms[i].draw();
-		++i;
-	}
-	i = 0;
-	while (i < trapezoidcount) {
-		trapezoids[i].setColorInGL();
-		trapezoids[i].setRotation(trapezoids[i].relr + rotation);
-		trapezoids[i].draw();
-		++i;
-	}
-	i = 0;
-	while (i < cylindercount) {
-		cylinders[i].setColorInGL();
-		cylinders[i].setRotation(cylinders[i].relr + rotation);
-		cylinders[i].draw();
-		++i;
-	}
+
+	glPopMatrix();
 }

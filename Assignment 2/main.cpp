@@ -107,7 +107,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new MyVehicle();
+	vehicle = new custVehicle();
 
 
 	// add test obstacles
@@ -228,17 +228,14 @@ void display() {
 	
 	*/
 	
-	custVehicle vehicle1(1);
-	vehicle1.setPosition(1, 0, 0);
-	vehicle1.setRotation(15);
-	vehicle1.newrectangularprism(0, 0.25, 0, 2, 0.75, 3,0,1,0,0);
-	vehicle1.newtrapezoid(0, 1, 3, 2.5, 0.6, 0.75, 2, 1.25, 270, 1, 1, 1);
-	vehicle1.newtriangularprism(0, 1, 0, 0.5, 0.4, 0, -2, 90, 0, 1, 0);
-	vehicle1.newcylinder(0, 0, 0.5, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
-	vehicle1.newcylinder(2, 0, 0.5, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
-	vehicle1.newcylinder(0, 0, 2.25, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
-	vehicle1.newcylinder(2, 0, 2.25, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
-	vehicle1.draw();
+
+
+	//vehicle1.newtriangularprism(0, 1, 0, 0.5, 0.4, 90, -2, 90, 0, 1, 0);
+	//vehicle1.newcylinder(0, 0, 0.5, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
+	//vehicle1.newcylinder(2, 0, 0.5, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
+	//vehicle1.newcylinder(0, 0, 2.25, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
+	//vehicle1.newcylinder(2, 0, 2.25, 0.25, 0.25, 0.4, 128, 1, 1, 90, 1, 0, 1);
+
 
 	/*
 	cylinder cylinder1(5, 3, 5, 256, 5, 5);
@@ -348,7 +345,7 @@ void idle() {
 				otherVehicles.clear();
 
 				// uncomment this line to connect to the robotics server.
-				//RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+				RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
@@ -359,7 +356,112 @@ void idle() {
 
 					//
 					// student code goes here
-					//
+					// Code that adds shapes to a Vehiclemodel for the remote server to read
+					ShapeInit Rectangle1;
+					Rectangle1.type = RECTANGULAR_PRISM;
+					Rectangle1.xyz[0] = 1.5;
+					Rectangle1.xyz[1] = 0.25;
+					Rectangle1.xyz[2] = -1;
+					Rectangle1.rgb[0] = 1;
+					Rectangle1.rgb[1] = 0;
+					Rectangle1.rgb[2] = 0;
+					Rectangle1.rotation = 90;
+					Rectangle1.params.rect.xlen=2;
+					Rectangle1.params.rect.ylen = 0.75;
+					Rectangle1.params.rect.zlen = 3;
+					vm.shapes.push_back(Rectangle1);
+
+					ShapeInit Trapezoid1;
+					Trapezoid1.type = TRAPEZOIDAL_PRISM;
+					Trapezoid1.xyz[0] = 1.75;
+					Trapezoid1.xyz[1] = 1;
+					Trapezoid1.xyz[2] = -1;
+					Trapezoid1.rgb[0] = 0;
+					Trapezoid1.rgb[1] = 0;
+					Trapezoid1.rgb[2] = 1;
+					Trapezoid1.rotation = 0;
+					Trapezoid1.params.trap.alen = 2.5;
+					Trapezoid1.params.trap.blen = 1.25;
+					Trapezoid1.params.trap.height = 0.6;
+					Trapezoid1.params.trap.aoff = 0.75;
+					Trapezoid1.params.trap.depth = 2;
+					vm.shapes.push_back(Trapezoid1);
+
+					ShapeInit Triangle1;
+					Triangle1.type = TRIANGULAR_PRISM;
+					Triangle1.xyz[0] = 0.25;
+					Triangle1.xyz[1] = 1;
+					Triangle1.xyz[2] = -1;
+					Triangle1.rgb[0] = 0;
+					Triangle1.rgb[1] = 1;
+					Triangle1.rgb[2] = 0;
+					Triangle1.rotation = 0;
+					Triangle1.params.tri.alen = 0.5;
+					Triangle1.params.tri.blen = 0.4;
+					Triangle1.params.tri.angle = 90;
+					Triangle1.params.tri.depth = -2;
+					vm.shapes.push_back(Triangle1);
+				
+
+					ShapeInit Cylinder1;
+					Cylinder1.type = CYLINDER;
+					Cylinder1.xyz[0] = 0.4;
+					Cylinder1.xyz[1] = 0.0001;
+					Cylinder1.xyz[2] = 0.2;
+					Cylinder1.rgb[0] = 1;
+					Cylinder1.rgb[1] = 1;
+					Cylinder1.rgb[2] = 1;
+					Cylinder1.rotation = 0;
+					Cylinder1.params.cyl.depth = 0.4;
+					Cylinder1.params.cyl.radius = 0.75;
+					Cylinder1.params.cyl.isRolling = TRUE;
+					Cylinder1.params.cyl.isSteering = FALSE;
+					vm.shapes.push_back(Cylinder1);
+
+					ShapeInit Cylinder2;
+					Cylinder2.type = CYLINDER;
+					Cylinder2.xyz[0] = 0.4;
+					Cylinder2.xyz[1] = 0.0001;
+					Cylinder2.xyz[2] = -2.2;
+					Cylinder2.rgb[0] = 1;
+					Cylinder2.rgb[1] = 1;
+					Cylinder2.rgb[2] = 1;
+					Cylinder2.rotation = 0;
+					Cylinder2.params.cyl.depth = 0.4;
+					Cylinder2.params.cyl.radius = 0.75;
+					Cylinder2.params.cyl.isRolling = TRUE;
+					Cylinder2.params.cyl.isSteering = FALSE;
+					vm.shapes.push_back(Cylinder2);
+
+					ShapeInit Cylinder3;
+					Cylinder3.type = CYLINDER;
+					Cylinder3.xyz[0] = 2.5;
+					Cylinder3.xyz[1] = 0.0001;
+					Cylinder3.xyz[2] = 0.2;
+					Cylinder3.rgb[0] = 1;
+					Cylinder3.rgb[1] = 1;
+					Cylinder3.rgb[2] = 1;
+					Cylinder3.rotation = 0;
+					Cylinder3.params.cyl.depth = 0.4;
+					Cylinder3.params.cyl.radius = 0.25;
+					Cylinder3.params.cyl.isRolling = TRUE;
+					Cylinder3.params.cyl.isSteering = TRUE;
+					vm.shapes.push_back(Cylinder3);
+
+					ShapeInit Cylinder4;
+					Cylinder4.type = CYLINDER;
+					Cylinder4.xyz[0] = 2.5;
+					Cylinder4.xyz[1] = 0.0001;
+					Cylinder4.xyz[2] = -2.2;
+					Cylinder4.rgb[0] = 1;
+					Cylinder4.rgb[1] = 1;
+					Cylinder4.rgb[2] = 1;
+					Cylinder4.rotation = 0;
+					Cylinder4.params.cyl.depth = 0.4;
+					Cylinder4.params.cyl.radius = 0.25;
+					Cylinder4.params.cyl.isRolling = TRUE;
+					Cylinder4.params.cyl.isSteering = TRUE;
+					vm.shapes.push_back(Cylinder4);
 
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
@@ -395,11 +497,47 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new MyVehicle();
+								otherVehicles[vm.remoteID] = new custVehicle(1);
+								for (std::vector<ShapeInit>::iterator it = vm.shapes.begin(); it != vm.shapes.end(); ++it) {//iterate through vehicle model shapeinit vector
 
-								//
-								// more student code goes here
-								//
+									if (it->type == TRAPEZOIDAL_PRISM) {//write trapezoidal prisms to a vehicle
+										trapezoid *Vtrap = new trapezoid(it->params.trap.alen, it->params.trap.height, it->params.trap.aoff, it->params.trap.depth, it->params.trap.blen);
+										Vtrap->setPosition(it->xyz[0], it->xyz[1], it->xyz[2]);
+										Vtrap->setRotation(it->rotation);
+										Vtrap->setColor(it->rgb[0], it->rgb[1], it->rgb[2]);
+										otherVehicles[vm.remoteID]->addShape(Vtrap);
+									}
+									else if (it->type == RECTANGULAR_PRISM){//write rectangular prism to a vehicle
+										rectangularprism *Vrect = new rectangularprism(it->params.rect.xlen, it->params.rect.ylen, it->params.rect.zlen);
+										Vrect->setPosition(it->xyz[0], it->xyz[1], it->xyz[2]);
+										Vrect->setRotation(it->rotation);
+										Vrect->setColor(it->rgb[0], it->rgb[1], it->rgb[2]);
+										otherVehicles[vm.remoteID]->addShape(Vrect);
+									}
+									else if (it->type == TRIANGULAR_PRISM) {//write triangular prism to a vehicle
+										triangularprism *Vtri = new triangularprism(it->params.tri.alen, it->params.tri.blen, it->params.tri.angle, it->params.tri.depth);
+										Vtri->setPosition(it->xyz[0], it->xyz[1], it->xyz[2]);
+										Vtri->setRotation(it->rotation);
+										Vtri->setColor(it->rgb[0], it->rgb[1], it->rgb[2]);
+										otherVehicles[vm.remoteID]->addShape(Vtri);
+									} 
+									
+									else if (it->type == CYLINDER) {// write cylinder to vehicle
+										cylinder *Vcyl = new cylinder(it->params.cyl.radius, it->params.cyl.radius, it->params.cyl.depth, 8, 3, 1, 0);//add steering later
+										Vcyl->setPosition(it->xyz[0], it->xyz[1]+it->params.cyl.radius, it->xyz[2]);
+										Vcyl->setRotation(it->rotation);
+										Vcyl->setColor(it->rgb[0], it->rgb[1], it->rgb[2]);
+										if (it->params.cyl.isSteering == TRUE)
+											Vcyl->setsteering(1);
+										if (it->params.cyl.isRolling == FALSE)
+											Vcyl->setspinning(0);
+										otherVehicles[vm.remoteID]->addShape(Vcyl);
+
+									}
+									else{}
+										//donothing
+								}
+
 							}
 							break;
 						}
@@ -550,108 +688,3 @@ void motion(int x, int y) {
 	prev_mouse_y = y;
 };
 
-/*
-legacy rectangular prism with rotation about y only
-void drawnewrectangularprism(double x1, double xlength, double y1, double ylength, double z1, double zlength, double yrotation) {
-	//convert degrees to radians
-	double yrc = cos(3.141592765*yrotation / 180);
-	double yrs = sin(3.141592765*yrotation / 180);
-	double x2 = x1 + xlength * yrc;
-	double x3 = x1 - zlength * yrs;
-	double x4 = (x2 + x3) - x1;
-	double x5 = x1;
-	double x6 = x2;
-	double x7 = x3;
-	double x8 = x4;
-	double y2 = y1;
-	double y3 = y1;
-	double y4 = y1;
-	double y5 = y1 + ylength;
-	double y6 = y5;
-	double y7 = y5;
-	double y8 = y5;
-	double z2 = z1 + xlength * yrs;
-	double z3 = z1 + zlength * yrc;
-	double z4 = z2 + z3 - z1;
-	double z5 = z1;
-	double z6 = z2;
-	double z7 = z3;
-	double z8 = z4;
-	glBegin(GL_QUAD_STRIP);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x2, y2, z2);
-	glVertex3d(x3, y3, z3);
-	glVertex3d(x4, y4, z4);
-	glVertex3d(x7, y7, z7);
-	glVertex3d(x8, y8, z8);
-	glVertex3d(x5, y5, z5);
-	glVertex3d(x6, y6, z6);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x2, y2, z2);
-	glEnd();
-	glBegin(GL_QUADS);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x3, y3, z3);
-	glVertex3d(x7, y7, z7);
-	glVertex3d(x5, y5, z5);
-	glVertex3d(x2, y2, z2);
-	glVertex3d(x4, y4, z4);
-	glVertex3d(x8, y8, z8);
-	glVertex3d(x6, y6, z6);
-	glEnd();
-
-	legacy of me overcomplicating rotation
-	//Draw command for a rectangular prism, rotation is about the initial point
-	void drawnewrectangularprism(double x1, double xlength, double y1, double ylength, double z1, double zlength, double yrotation, double xrotation) {
-	//convert degrees to radians
-	double yrc = cos(3.141592765*yrotation / 180);
-	double yrs = sin(3.141592765*yrotation / 180);
-	double xrc = cos(3.141592765*xrotation / 180);
-	double xrs = sin(3.141592765*xrotation / 180);
-	//define coordinates for each vertex
-	double x2 = x1 + xlength * yrc;
-	double x3 = x1 - zlength * yrs;
-	double x4 = x1 + xlength * yrc - zlength * yrs;
-	double x5 = x1;
-	double x6 = x2;
-	double x7 = x3;
-	double x8 = x4;
-	double y2 = y1;
-	double y3 = y1 + zlength * xrs;
-	double y4 = y3;
-	double y5 = y1 + ylength * xrc;
-	double y6 = y5;
-	double y7 = y3 + y5 - y1;
-	double y8 = y7;
-	double z2 = z1 + xlength * yrs;
-	double z3 = z1 + zlength * yrc + xrc * zlength;
-	double z4 = z1 + zlength * yrc + xlength * yrs + xlength * yrs + xrc * zlength;
-	double z5 = z1 - xrc * ylength;
-	double z6 = z5 + xlength * yrs;
-	double z7 = z5 + zlength * yrc;
-	double z8 = z5 + zlength * yrc + xlength * yrs;
-	//draw
-	glBegin(GL_QUAD_STRIP);
-	glVertex3d(x1,y1,z1);
-	glVertex3d(x2,y2,z2);
-	glVertex3d(x3,y3, z3);
-	glVertex3d(x4, y4, z4);
-	glVertex3d(x7, y7, z7);
-	glVertex3d(x8, y8, z8);
-	glVertex3d(x5, y5, z5);
-	glVertex3d(x6, y6, z6);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x2, y2, z2);
-	glEnd();
-	glBegin(GL_QUADS);
-	glVertex3d(x1, y1, z1);
-	glVertex3d(x3, y3, z3);
-	glVertex3d(x7, y7, z7);
-	glVertex3d(x5, y5, z5);
-	glVertex3d(x2, y2, z2);
-	glVertex3d(x4, y4, z4);
-	glVertex3d(x8, y8, z8);
-	glVertex3d(x6, y6, z6);
-	glEnd();
-	}
-}*/
