@@ -127,7 +127,7 @@ void rectangularprism::draw() {
 	glTranslated(x, y, z);
 	glRotated(rotation, 0, 1, 0);
 	//define all vertexes
-
+	//x,z is the center of the rectangular prism,
 	glBegin(GL_QUAD_STRIP);
 	glVertex3d(-xlength/2, 0, -zlength/2);
 	glVertex3d(xlength/2, 0, -zlength / 2);
@@ -210,8 +210,6 @@ void trapezoid::draw() {
 	glPushMatrix();
 	glTranslated(x-abs(base)/2, y, z-abs(length/2));
 	glRotated(rotation, 0, 1, 0);
-	double rc = cos(3.141592765*rotation / 180);
-	double rs = sin(3.141592765*rotation / 180);
 
 
 	glBegin(GL_POLYGON);
@@ -243,10 +241,9 @@ void trapezoid::draw() {
 	glPopMatrix();
 }
 
-void cylinder::setdimensions(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_) {
+void cylinder::setdimensions(double baseRadius_, double height_, int slices_, int stacks_, int loops_) {
 
-	baseRadius = baseRadius_;
-	topRadius = topRadius_;
+	Radius = baseRadius_;
 	height = height_;
 	slices = slices_;
 	stacks = stacks_;
@@ -262,7 +259,11 @@ void cylinder::turnit(double turnit) {
 }
 
 void cylinder::spinup(double speed) {
-	spin = spin + speed* (180)/3.141592765;
+	if (spin >= 360)
+		spin = spin - 360;
+	spin = spin + ((speed* (180)/3.141592765) / Radius)/40; //runs at 40fps so time between frames is 1/40s
+//prevents spin from getting too large
+
 }
 
 void cylinder::setspinning(int sspin){
@@ -278,45 +279,37 @@ void cylinder::draw() {
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
-	glRotated(rotation,0,1,0); // to rotate the shape about y axis
-	glTranslated(x, y, z-height/2);
+	glRotated(rotation, 0, 1, 0); // to rotate the shape about y axis
+	glTranslated(x, y, z - height / 2);
 	glRotated(turn, 0, 1, 0);
-	glRotated(-spin * spinning*0.025/baseRadius, 0, 0, 1);
-	
+	glRotated(-spin * spinning, 0, 0, 1);
+
 
 	//glColor3f(1, 0, 0); // give red color to the surface
-	gluCylinder(gluNewQuadric(), baseRadius, topRadius, height, slices, stacks); // draw the surface of cylinder
+	gluCylinder(gluNewQuadric(), Radius, Radius, height, slices, stacks); // draw the surface of cylinder
 
-	
-	gluDisk(gluNewQuadric(), 0, baseRadius, slices, loops);
+
+	gluDisk(gluNewQuadric(), 0, Radius, slices, loops);
 	glColor3f(0, 0, 0);
 	glBegin(GL_POLYGON);
-	glVertex3d(0.05, -baseRadius, -0.01);
-	glVertex3d(-0.05, -baseRadius, -0.01);
-	glVertex3d(-0.05, baseRadius, -0.01);
-	glVertex3d(0.05, baseRadius, -0.01);
+	glVertex3d(0.05, -Radius, -0.01);
+	glVertex3d(-0.05, -Radius, -0.01);
+	glVertex3d(-0.05, Radius, -0.01);
+	glVertex3d(0.05, Radius, -0.01);
 
 	glEnd();
 	glColor3f(red, green, blue);
 	glTranslated(0, 0, height);
 	//glColor3f(0, 1, 0); // give green color to the circle
-	gluDisk(gluNewQuadric(), 0, topRadius, slices, loops); // draw the circle
+	gluDisk(gluNewQuadric(), 0, Radius, slices, loops); // draw the circle
 
 	glColor3f(0, 0, 0);
 	glBegin(GL_POLYGON);
-	glVertex3d(0.05, -baseRadius, 0.01);
-	glVertex3d(-0.05, -baseRadius, 0.01);
-	glVertex3d(-0.05, baseRadius, 0.01);
-	glVertex3d(0.05, baseRadius, 0.01);
+	glVertex3d(0.05, -Radius, 0.01);
+	glVertex3d(-0.05, -Radius, 0.01);
+	glVertex3d(-0.05, Radius, 0.01);
+	glVertex3d(0.05, Radius, 0.01);
 
 	glEnd();
 	glPopMatrix();
 }
-//grab a point from a trapezoidal prism
-/* obsolete, see Shape.hpp for reasoning
-void Shape::getpoint(int i) {
-	xpoint = xp[i];
-	ypoint = yp[i];
-	zpoint = zp[i];
-}
-*/

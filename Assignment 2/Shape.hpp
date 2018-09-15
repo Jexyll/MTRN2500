@@ -42,9 +42,8 @@ protected:
 	double x, y, z;               // position
 	double rotation;              // heading of the object in the horizontal plane (degrees)
 	float red, green, blue;       // colour of object
-	int type;
-	double spin =0;
-      // position of object relative to center of rotation of vehicle
+	int type;					  // used in vehicle draw function to determine what type of shape is being drawn, only relevant for cylinders
+
 
 };
 
@@ -98,8 +97,8 @@ class cylinder : public Shape {
 public:
 
 	cylinder();
-	cylinder(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_, int turning_)
-		:baseRadius(baseRadius_), topRadius(topRadius_), height(height_), slices(slices_), stacks(stacks_), loops(loops_), turning(turning_)
+	cylinder(double baseRadius_, double height_, int slices_, int stacks_, int loops_, int turning_)
+		:Radius(baseRadius_), height(height_), slices(slices_), stacks(stacks_), loops(loops_), turning(turning_)
 	{
 		spin = 0;
 		spinning = 1;
@@ -107,14 +106,14 @@ public:
 		turn = 0;
 	};		
 	virtual void turnit(double turn);
-	void spinup(double speed);
-	void setspinning(int sspin);
+	void spinup(double speed);//increments spin for wheels
+	void setspinning(int sspin);//changes whether element is spinning or not
 	void draw();
-	void setdimensions(double baseRadius_, double topRadius_, double height_, int slices_, int stacks_, int loops_);
+	void setdimensions(double baseRadius_, double height_, int slices_, int stacks_, int loops_);
 	void setsteering(int steer);
 protected:
 
-	double baseRadius, topRadius, height, spin, turn, turning;
+	double Radius, height, spin, turn, turning;
 	int slices, stacks, loops, spinning;
 };
 

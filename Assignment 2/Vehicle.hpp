@@ -44,7 +44,7 @@ double clamp(double a, double n, double b);
 class custVehicle : public Vehicle {
 public:
 	friend class Cylinder;
-	custVehicle(double blank) {}
+	custVehicle(double blank) {}//creates a new vehicle without any of the custom elements if an argument is provided
 	custVehicle();
 	void draw();
 };

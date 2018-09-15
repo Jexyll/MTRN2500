@@ -523,7 +523,7 @@ void idle() {
 									} 
 									
 									else if (it->type == CYLINDER) {// write cylinder to vehicle
-										cylinder *Vcyl = new cylinder(it->params.cyl.radius, it->params.cyl.radius, it->params.cyl.depth, 8, 3, 1, 0);//add steering later
+										cylinder *Vcyl = new cylinder(it->params.cyl.radius, it->params.cyl.depth, 8, 3, 1, 0);//add steering later
 										Vcyl->setPosition(it->xyz[0], it->xyz[1]+it->params.cyl.radius, it->xyz[2]);
 										Vcyl->setRotation(it->rotation);
 										Vcyl->setColor(it->rgb[0], it->rgb[1], it->rgb[2]);
